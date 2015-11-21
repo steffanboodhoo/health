@@ -1,5 +1,5 @@
 <?php
- 
+
 require 'vendor/autoload.php';
 include 'manager.php';
 
@@ -13,16 +13,22 @@ ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
 error_reporting(-1);
 
+
+$_SESSION['working'] = 'no';
+$_SESSION['access'] = false;
+
+$app->get('/test', function(){
+    echo 'pew pew pew';
+});
+
 $app->get('/', function()use ($app) {
     $app->render('login.php');
 });
-/*
-$app->get('/hello/:name', function ($name) {
-    echo "Hello, $name";
-});*/
 
-$app->get('/test', function() use ($app) {
+
+$app->get('/home', function() use ($app) {
     $app->render('home.php');
+
 });
 
 $app->get('/getAll',function(){
@@ -39,4 +45,9 @@ $app->post('/subject/update',function() use ($app){
 	$constraints = $allPostVars['constraint'];
 	update($updateObj, $constraints);//in manager.php
 });
+$app->post('/login',function() use ($app){
+	$allPostVars = $app->request->post();
+	$_SESSION['access'] = login($allPostVars['username'], $allPostVars['password']); 
+});
+
 $app->run();

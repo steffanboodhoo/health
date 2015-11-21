@@ -17,11 +17,12 @@ $dataObj = array(
 	'symptoms' => 'butterflies',
 	'notes' => 'Im unsure of this person, kinda shy, we exchanged thoughts, she cried for me');
 
-$constraintsObj = array('id' => '3');
+// $constraintsObj = array('id' => '3');
 // $db->modify($dataObj,$constraintsObj);
-update($dataObj,$constraintsObj);
+// update($dataObj,$constraintsObj);
 // $results = $db->getAll();
-// echo $results;
-// echo getAll();
+login('dave','chickpass1');
+//9ef9720585ec6a9af16c76f5fee34c55
+//9ef9720585ec6a9af16c76f5fee34c55
 echo "test\n";
 ?>

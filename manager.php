@@ -1,7 +1,7 @@
 <?php
 
 include 'db.php';
-
+$salt = 'salty salty salt';
 function getAll(){
 	$db = new dbQuery();
 	$results = $db->getAll();
@@ -35,6 +35,18 @@ function update($dataObj,$constraintObj){
 	$dataObj['seen'] = '\''.$dataObj['seen'].'\'';
 	$db = new dbQuery();
 	$db->modify($dataObj,$constraintObj);
+}
+// dave chickpass1
+function login($username, $password){
+	global $salt;
+	$db = new dbQuery();
+	$hashedPass = hash('md5',$password.$salt);
+	// echo $hashedPass;
+	$resp = $db->validate($username,$hashedPass);
+	if($resp->num_rows > 0 ){
+		return true;
+	}
+	return false;
 }
 
 ?>

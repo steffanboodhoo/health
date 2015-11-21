@@ -25,10 +25,23 @@ Class dbQuery{
 	}
 
 	function initialization(){
+		global $conn;
 		$query_str = "create table if not exists subject( id int not null auto_increment, age int, sex char(1), onset date, seen date, address varchar (150), lon float, lat float, phone int, diagnosis varchar (150), referral char(1), symptoms varchar (150), notes varchar(500), primary key (id)) ";
-	
+		$resp = $conn->query($query_str);
+		return $resp;
 	}
-
+	function createUser(){
+		global $conn;
+		$query_str = "create table if not exists users( username varchar(50) not null, password varchar(50) not null, primary key(username));";
+		$resp = $conn->query($query_str);
+		return $resp;
+	}
+	function validate($username, $password){
+		global $conn;
+		$query_str = "select * from users where username = '".$username."' and password = '".$password."';";
+		$resp = $conn->query($query_str);
+		return $resp;
+	}
 	function insert($dataObj){
 		global $conn;
 		$query_str = "insert into subject(age,sex,onset,seen,address, lon,lat,phone,diagnosis,referral,symptoms,notes) values(";

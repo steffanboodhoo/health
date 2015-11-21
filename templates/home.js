@@ -211,9 +211,6 @@ $( document ).ready(function() {
 
      function _get(url,params,call_back){
         var adj_url = '/health/index.php'+url;
-        
-        // adj_url+='/moodle/report/test/api.php';
-        // var adj_url = url; 
         console.log(adj_url);
         $.ajax({
             url:adj_url,
@@ -234,9 +231,6 @@ $( document ).ready(function() {
     }
     function _post(url,params,call_back){
         var adj_url = '/health/index.php'+url;
-        
-        // adj_url+='/moodle/report/test/api.php';
-        // var adj_url = url; 
         console.log(adj_url);
         $.ajax({
             url:adj_url,

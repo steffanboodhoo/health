@@ -1,3 +1,6 @@
+<?php
+
+?>
 <html>
 	<head>
 		<link rel="stylesheet" href="../bootstrap.css" type="text/css">
@@ -147,6 +150,9 @@
 	          </div> <!-- /.row -->
 	          <!-- END CUSTOM TABS -->
 	    </section><!-- /.content -->
+	    <?php
+			print_r($_SESSION);
+		?>
 	</div>
 
 		<script type="text/javascript" src="../templates/jquery.min.js"></script>
