@@ -15,7 +15,7 @@ error_reporting(-1);
 
 
 $_SESSION['working'] = 'no';
-$_SESSION['access'] = false;//changingthis breiaks the ap kinda weird
+$_SESSION['user_access'] = 0;//changingthis breiaks the ap kinda weird
 $app->get('/test', function(){
     echo 'pew pew pew';
 });
@@ -33,6 +33,12 @@ $app->get('/home', function() use ($app) {
 $app->get('/getAll',function(){
 	echo getAll();//in manager.php
 });
+$app->get('/validate',function(){
+	if(isset($_SESSION['access']))
+		echo "{'status':".$_SESSION['access']."}";
+	else
+		echo "{'status':0}";
+});
 
 $app->post('/subject',function() use ($app){
 	$allPostVars = $app->request->post();
@@ -47,9 +53,11 @@ $app->post('/subject/update',function() use ($app){
 $app->post('/login',function() use ($app){
 	$allPostVars = $app->request->post();
 	$_SESSION['user_access'] = login($allPostVars['username'], $allPostVars['password']); 
-	if($_SESSION['user_access'])
-		return "{'status':'success'}";
-	return "{'status':'failure'}";
+	if($_SESSION['user_access'] > 0)
+		echo "{'status':'1'}";
+	else
+		echo "{'status':'0'}";
 });
+
 
 $app->run();

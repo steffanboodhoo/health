@@ -1,16 +1,16 @@
 <?php
 Class dbQuery{
-
-	protected $host = "localhost";
-	protected $user = "root";
-	protected $pass = "admin";
-	protected $db = "moodledb";
-	protected $conn = null;
+	protected $user, $pass, $db, $host, $conn;
+	/*$user = "steffan";
+	$pass = "chikungunyavirus";
+	$db = "chickv";*/
+	
 
 	function __construct(){
-		// $conn = new mysqli($host,$user,$pass,$db);
-		global $conn;
-		$conn = new mysqli("localhost","root","admin","moodledb");
+		global $conn, $user, $pass, $db, $host;
+		$user = "root";$pass = "admin";$host = "localhost";$db="moodledb";
+		// $user = "steffan";$pass = "chikungunyavirus";$host = "localhost";$db="chickv";
+		$conn = new mysqli($host, $user, $pass, $db);
 		if($conn -> connect_errno){
 			echo "failed to connect to mysql:(". $conn->connect_errno .") ".$mysql->connect_error;
 		}	
@@ -24,7 +24,7 @@ Class dbQuery{
 
 	}
 
-	function initialization(){
+	function createSubject(){
 		global $conn;
 		$query_str = "create table if not exists subject( id int not null auto_increment, age int, sex char(1), onset date, seen date, address varchar (150), lon float, lat float, phone int, diagnosis varchar (150), referral char(1), symptoms varchar (150), notes varchar(500), primary key (id)) ";
 		$resp = $conn->query($query_str);
