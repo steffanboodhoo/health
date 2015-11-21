@@ -109,23 +109,24 @@ $( document ).ready(function() {
         _post('/subject',dataObj,null);    
     }
 
-    function update(){
+    function update(constraints){
         var dataObj = {};
-        dataObj['name'] = $('#input_name').val();
-        dataObj['age'] = $('#input_age').val();
-        dataObj['sex'] = $('input[name="radio_sex"]:checked').val();
-        dataObj['address'] = $('#input_address').val();
-        dataObj['diagnosis'] = $('#input_diagnosis').val();
-        dataObj['referral'] = $('input[name="radio_referral"]:checked').val();
-        dataObj['symptoms'] = $('#input_symptoms').val();
-        dataObj['notes'] = $('#input_notes').val();
-        var dates = [$('#date_onset').datepicker('getDate'),$('#date_seen').datepicker('getDate')];
+        dataObj['age'] = $('#modify_age').val();
+        // dataObj['sex'] = $('input[name="radio_sex"]:checked').val();
+        dataObj['address'] = $('#modify_address').val();
+        dataObj['diagnosis'] = $('#modify_diagnosis').val();
+        // dataObj['referral'] = $('input[name="radio_referral"]:checked').val();
+        dataObj['symptoms'] = $('#modify_symptoms').val();
+        dataObj['notes'] = $('#modify_notes').val();
+        var dates = [$('#modify_onset').datepicker('getDate'),$('#modify_seen').datepicker('getDate')];
         dates = [dates[0].getTime()/1000,dates[1].getTime()/1000];
         dataObj['onset'] = dates[0];
         dataObj['seen'] = dates[1];
-        console.log(dataObj);
-
         
+        var postObj = {};
+        postObj['update'] = dataObj;
+        postObj['constraint'] = constraints;
+        console.log(postObj);
     }
 
     function navToEdit(oldRec){
@@ -189,17 +190,15 @@ $( document ).ready(function() {
     	cdiv(3,oldRec['seen']).appendTo(d8);
     	$('.modify_date').datepicker();
 
-        var d9 = cdiv(2).append(set);
+        var d9 = cdiv(2).appendTo(set);
         cdiv(1).appendTo(d9);
-        cdiv(1).append($('<button>',{"type":"button","id":"btn_modify","class":"btn btn-info"}).append("Done")).appendTo(d9);
-        /*<div class="form-group">
-                             <div class="col-md-4"></div>
-                              <div class="col-md-8">
-                                <button id="btn_save" type="button" name="btn_save" class="btn btn-info">Done</button>
-                              </div>
-                            </div>*/
-
-    	function cdiv(opt,old){
+        cdiv(1).append($('<button>',{"type":"button","id":"btn_modify","class":"btn btn-info"}).append("done")).appendTo(d9);
+        
+        $('#btn_modify').click(function(){
+            update({'id':oldRec['id']});
+        })
+    	
+        function cdiv(opt,old){
     		if(opt==1)
     			return $('<div/>',{"class":"col-md-4"});
     		if(opt==2)
