@@ -15,8 +15,7 @@ error_reporting(-1);
 
 
 $_SESSION['working'] = 'no';
-$_SESSION['access'] = false;
-
+$_SESSION['access'] = false;//changingthis breiaks the ap kinda weird
 $app->get('/test', function(){
     echo 'pew pew pew';
 });
@@ -47,7 +46,10 @@ $app->post('/subject/update',function() use ($app){
 });
 $app->post('/login',function() use ($app){
 	$allPostVars = $app->request->post();
-	$_SESSION['access'] = login($allPostVars['username'], $allPostVars['password']); 
+	$_SESSION['user_access'] = login($allPostVars['username'], $allPostVars['password']); 
+	if($_SESSION['user_access'])
+		return "{'status':'success'}";
+	return "{'status':'failure'}";
 });
 
 $app->run();

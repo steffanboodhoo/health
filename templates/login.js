@@ -1,12 +1,13 @@
 $( document ).ready(function() {
     
     // _get('/test',null,null); works
+    setup();
     function setup(){
-    	$('btn_login').click(function{
-
+    	$('#btn_login').click(function(){
+    		login();
     	});
-    	$('btn_guest').click(function(){
-
+    	$('#btn_guest').click(function(){
+    		_get('/home',null,null);
     	});
     }
     function login(){
@@ -14,7 +15,7 @@ $( document ).ready(function() {
     	dataObj['username'] = $('#input_username').val();
     	dataObj['password'] = $('#input_password').val();
     	console.log(dataObj);
-    	_get('/login',dataObj,function(data){
+    	_post('/login',dataObj,function(data){
     		console.log(data);
     	})
     }

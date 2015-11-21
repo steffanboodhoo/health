@@ -44,9 +44,9 @@ function login($username, $password){
 	// echo $hashedPass;
 	$resp = $db->validate($username,$hashedPass);
 	if($resp->num_rows > 0 ){
-		return true;
+		return 1;
 	}
-	return false;
+	return 0;
 }
 
 ?>

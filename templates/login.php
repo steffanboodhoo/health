@@ -3,8 +3,8 @@ if($_SESSION['access']){
 	header("Location: http://localhost/health/index.php/home");
 	die();
 }
-
 ?>
+
 <html>
 	<head>
 		<link rel="stylesheet" href="bootstrap.css" type="text/css">
