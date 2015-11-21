@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-    
+    var baseurl = 'http://localhost/health';
     // _get('/test',null,null); works
     setup();
     function setup(){
@@ -16,7 +16,8 @@ $( document ).ready(function() {
     	dataObj['password'] = $('#input_password').val();
     	console.log(dataObj);
     	_post('/login',dataObj,function(data){
-    		console.log(data);
+    		if(data['status']==1)
+                window.location = "/index.php/home";
     	})
     }
 

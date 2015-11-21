@@ -8,14 +8,26 @@ $app = new \Slim\Slim();
     'debug' => true,
     'templates.path' => './templates'
 ));
+$app->add(new \Slim\Middleware\SessionCookie(array(
+    'expires' => '20 minutes',
+    'path' => '/',
+    'domain' => null,
+    'secure' => false,
+    'httponly' => false,
+    'name' => 'slim_session',
+    'secret' => 'CHANGE_ME',
+    'cipher' => MCRYPT_RIJNDAEL_256,
+    'cipher_mode' => MCRYPT_MODE_CBC
+)));
+
 
 ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
 error_reporting(-1);
 
 
-$_SESSION['working'] = 'no';
-$_SESSION['user_access'] = 0;//changingthis breiaks the ap kinda weird
+// $_SESSION['working'] = 'no';
+// $_SESSION['user_access'] = 0;//changingthis breiaks the ap kinda weird
 $app->get('/test', function(){
     echo 'pew pew pew';
 });
@@ -33,11 +45,13 @@ $app->get('/home', function() use ($app) {
 $app->get('/getAll',function(){
 	echo getAll();//in manager.php
 });
+
 $app->get('/validate',function(){
-	if(isset($_SESSION['access']))
-		echo "{'status':".$_SESSION['access']."}";
-	else
-		echo "{'status':0}";
+	global $_SESSION;
+	$returnObj['status'] = 0;
+	if(isset($_SESSION['user_access']))
+		$returnObj['status'] = $_SESSION['user_access'];
+	echo json_encode($returnObj);// 0 false > 0 true
 });
 
 $app->post('/subject',function() use ($app){
@@ -52,11 +66,10 @@ $app->post('/subject/update',function() use ($app){
 });
 $app->post('/login',function() use ($app){
 	$allPostVars = $app->request->post();
+	global $_SESSION;
 	$_SESSION['user_access'] = login($allPostVars['username'], $allPostVars['password']); 
-	if($_SESSION['user_access'] > 0)
-		echo "{'status':'1'}";
-	else
-		echo "{'status':'0'}";
+	$returnObj['status'] = $_SESSION['user_access'];// 0 false, > 0 true
+	echo json_encode($returnObj);
 });
 
 
