@@ -127,6 +127,7 @@ $( document ).ready(function() {
         postObj['update'] = dataObj;
         postObj['constraint'] = constraints;
         console.log(postObj);
+        _post('/subject/update',postObj,null);
     }
 
     function navToEdit(oldRec){

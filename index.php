@@ -35,7 +35,8 @@ $app->post('/subject',function() use ($app){
 });
 $app->post('/subject/update',function() use ($app){
 	$allPostVars = $app->request->post();
-	print_r($allPostVars);
-	// echo update($allPostVars);//in manager.php
+	$updateObj = $allPostVars['update']; 
+	$constraints = $allPostVars['constraint'];
+	update($updateObj, $constraints);//in manager.php
 });
 $app->run();

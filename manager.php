@@ -25,9 +25,9 @@ function update($dataObj,$constraintObj){
 	$dataObj['onset'] = date ("Y-m-d", $dataObj['onset']);
 	$dataObj['seen'] = date ("Y-m-d", $dataObj['seen']);
 
-	$dataObj['address'] = '\''.$dataObj['dataObj'].'\'';
-	$dataObj['sex'] = '\''.$dataObj['sex'].'\'';
-	$dataObj['referral'] = '\''.$dataObj['referral'].'\'';
+	$dataObj['address'] = '\''.$dataObj['address'].'\'';
+	// $dataObj['sex'] = '\''.$dataObj['sex'].'\'';
+	// $dataObj['referral'] = '\''.$dataObj['referral'].'\'';
 	$dataObj['diagnosis'] = '\''.$dataObj['diagnosis'].'\'';
 	$dataObj['notes'] = '\''.$dataObj['notes'].'\'';
 	$dataObj['symptoms'] = '\''.$dataObj['symptoms'].'\'';
