@@ -53,6 +53,12 @@ $app->get('/validate',function(){
 		$returnObj['status'] = $_SESSION['user_access'];
 	echo json_encode($returnObj);// 0 false > 0 true
 });
+$app->get('/logout',function(){
+	global $_SESSION;
+	$_SESSION['user_access'] = 0;
+	$returnObj['status']=1;
+	echo json_encode($returnObj);// 0 false > 0 true
+});
 
 $app->post('/subject',function() use ($app){
 	$allPostVars = $app->request->post();

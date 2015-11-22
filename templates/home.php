@@ -6,10 +6,17 @@
 		<link rel="stylesheet" href="../bootstrap.css" type="text/css">
 		<link rel="stylesheet" href="../datatables.css" type="text/css">
 		<link rel="stylesheet" href="../my.css" type="text/css">
+		<link rel="stylesheet" href="fonts/*" type="text/css">
 	</head>
 	<body>
 		 
 <!-- Main content -->
+	<div class="col-sm-9"></div>
+	<div class="col-sm-3">
+		<button id="btn_access">
+			<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+		</button>
+	</div>
 	<div class="container-fluid main-container">
 	    <section class="content">
 	        <!-- START CUSTOM TABS -->

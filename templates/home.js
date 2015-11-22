@@ -25,6 +25,11 @@ $( document ).ready(function() {
     	$('#btn_save').click(function(){
     		insert();
     	});
+
+        $('#btn_access').click(function(){
+            logout();
+        });
+
     })();
 
 
@@ -209,6 +214,28 @@ $( document ).ready(function() {
     	}
     }
 
+    function logout(){
+        _get('/validate',null,function(dataObj){
+            // console.log(dataObj);
+            //if true
+            if(dataObj['status']==1){console.log('logging out');
+
+                //unset and log out
+                _get('/logout',null,function(dataObj){
+                    if(dataObj['status']==1)
+                        console.log('successful log out');
+                })
+            }else{console.log('redirecting');
+                //redirect
+                
+                var getUrl = window.location.origin;
+                getUrl+='/health/'
+                console.log(getUrl);
+                window.location = getUrl;
+            }   
+        })
+    }
+
      function _get(url,params,call_back){
         var adj_url = '/health/index.php'+url;
         console.log(adj_url);
@@ -217,8 +244,6 @@ $( document ).ready(function() {
             type:'GET',
             data:params,
             success:function(response){
-                console.log('----');
-                console.log(response);
                 if(typeof call_back==='function')
                     call_back(JSON.parse(response))
                 else

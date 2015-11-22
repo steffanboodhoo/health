@@ -43,10 +43,16 @@ if(isset($_SESSION['user_access'])){
 			    <button id="btn_guest" type="button" name="btn_guest" class="btn btn-default">Continue as guest</button>
 			  </div>
 			</div>
-
+			<!--
 			<div class="form-group">
 				<div class="col-md-4"></div>
 				<div id ="wrong_pass"></div>
+			</div>
+			-->
+			<div id="err_box" class="alert alert-danger" role="alert" >
+			  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+			  <span class="sr-only">Error:</span>
+			  Enter a valid email address
 			</div>
 			
 			</fieldset>
