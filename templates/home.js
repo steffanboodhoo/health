@@ -23,6 +23,7 @@ $( document ).ready(function() {
     		$('.date_field').datepicker();
     	})();
         _get('/validate',null,function(dataObj){
+            toggleBox(false);
             if(dataObj['status']==1)
                 access = true;
         })
@@ -81,10 +82,10 @@ $( document ).ready(function() {
 
 		var table = $('#results_table').DataTable();
 		$('#results_table tbody').on( 'click', 'button', function () {  	
-        	/*if(!access){
+        	if(!access){
                 toggleBox(true);
                 return;
-            }*/
+            }
             var data = table.row( $(this).parents('tr') ).data();
         	data.pop(10);
         	var dataObj = {};
