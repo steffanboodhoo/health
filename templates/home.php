@@ -164,9 +164,6 @@
 			  You do not have access, please login by clicking the login button to the top right
 		</div>
 
-	    <?php
-			print_r($_SESSION);
-		?>
 	</div>
 
 		<script type="text/javascript" src="../templates/jquery.min.js"></script>
