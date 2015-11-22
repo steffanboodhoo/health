@@ -1,6 +1,7 @@
 $( document ).ready(function() {
     console.log( "ready!" );
     
+    var access = false;
 	var action = {
 		'display':1,
 		'create':2,
@@ -21,14 +22,24 @@ $( document ).ready(function() {
     		
     		$('.date_field').datepicker();
     	})();
-
+        _get('/validate',null,function(dataObj){
+            if(dataObj['status']==1)
+                access = true;
+        })
     	$('#btn_save').click(function(){
-    		insert();
+    		if(access)
+                insert();
+            else
+                toggleBox(true);
     	});
 
         $('#btn_access').click(function(){
             logout();
         });
+
+        $('.nav').click(function(){
+            toggleBox(false);
+        })
 
     })();
 
@@ -70,7 +81,11 @@ $( document ).ready(function() {
 
 		var table = $('#results_table').DataTable();
 		$('#results_table tbody').on( 'click', 'button', function () {  	
-        	var data = table.row( $(this).parents('tr') ).data();
+        	/*if(!access){
+                toggleBox(true);
+                return;
+            }*/
+            var data = table.row( $(this).parents('tr') ).data();
         	data.pop(10);
         	var dataObj = {};
         	dataObj['id'] = data[0];
@@ -111,7 +126,8 @@ $( document ).ready(function() {
         dataObj['lon'] = $('#input_lon').val();
         dataObj['lat'] = $('#input_lat').val();
         console.log(dataObj);
-        _post('/subject',dataObj,null);    
+        _post('/subject',dataObj,null);  
+        document.getElementById("insert_form").reset();  
     }
 
     function update(constraints){
@@ -132,6 +148,7 @@ $( document ).ready(function() {
         postObj['update'] = dataObj;
         postObj['constraint'] = constraints;
         console.log(postObj);
+        document.getElementById("update_form").reset();
         _post('/subject/update',postObj,null);
     }
 
@@ -155,7 +172,7 @@ $( document ).ready(function() {
     function createEdit(oldRec){
     	var tab = $('#tab_2');
     	tab.empty();
-    	var form = $('<form/>',{"class":"form-horizontal"}).appendTo(tab);
+    	var form = $('<form/>',{"class":"form-horizontal","id":"update_form"}).appendTo(tab);
     	var set = $('<fieldset/>').appendTo(form);
     	$('<legend/>').append('Modifications').appendTo(set);
 
@@ -201,7 +218,10 @@ $( document ).ready(function() {
         cdiv(1).append($('<button>',{"type":"button","id":"btn_modify","class":"btn btn-info"}).append("done")).appendTo(d9);
         
         $('#btn_modify').click(function(){
-            update({'id':oldRec['id']});
+            if(access)
+                update({'id':oldRec['id']});
+            else
+                toggleBox(true);
         })
     	
         function cdiv(opt,old){
@@ -269,6 +289,13 @@ $( document ).ready(function() {
                 "Content-Type":"application/x-www-form-urlencoded",
             }
         })
+    }
+
+    function toggleBox(visbility){
+        if(visbility)
+            $('#err_box').show(); 
+        else
+            $('#err_box').hide(); 
     }
 
 

@@ -7,7 +7,9 @@ $( document ).ready(function() {
     		login();
     	});
     	$('#btn_guest').click(function(){
-    		_get('/home',null,null);
+    		var getUrl = window.location.origin;
+            getUrl+='/health/index.php/home';
+            window.location = getUrl;
     	});
         $('#err_box').hide();
     })();

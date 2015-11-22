@@ -34,7 +34,7 @@
 	                      <div id="table_container"></div>
 	                  </div><!-- /.tab-pane -->
 	                  <div class="tab-pane" id="tab_1">
-	                    <form class="form-horizontal">
+	                    <form class="form-horizontal" id="insert_form">
 							<fieldset>
 							<legend>Registration</legend>
 
@@ -157,6 +157,13 @@
 	          </div> <!-- /.row -->
 	          <!-- END CUSTOM TABS -->
 	    </section><!-- /.content -->
+
+	    <div id="err_box" class="alert alert-danger" role="alert" >
+			  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+			  <span class="sr-only">Error:</span>
+			  You do not have access, please login by clicking the login button to the top right
+		</div>
+
 	    <?php
 			print_r($_SESSION);
 		?>
