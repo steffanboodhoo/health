@@ -24,8 +24,11 @@ $( document ).ready(function() {
     	})();
         _get('/validate',null,function(dataObj){
             toggleBox(false);
-            if(dataObj['status']==1)
+            $("#btn_access").attr('title', 'Login');
+            if(dataObj['status']==1){
                 access = true;
+                $("#btn_access").attr('title', 'Logout');
+            }
         })
     	$('#btn_save').click(function(){
     		if(access)
@@ -233,13 +236,16 @@ $( document ).ready(function() {
     }
 
     function logout(){
+        console.log('logout clicked');
         _get('/validate',null,function(dataObj){
             if(dataObj['status']==1){console.log('logging out');
 
                 //unset and log out
                 _get('/logout',null,function(dataObj){
-                    if(dataObj['status']==1)
+                    if(dataObj['status']==1){
                         console.log('successful log out');
+                        location.reload();
+                    }
                 })
             }else{console.log('redirecting');
                 //redirect
@@ -288,9 +294,12 @@ $( document ).ready(function() {
     }
 
     function toggleBox(visbility){
-        if(visbility)
+        if(visbility){
             $('#err_box').show(); 
-        else
+            $('html, body').animate({
+                scrollTop: $("#err_box").offset().top
+            }, 500);
+        }else
             $('#err_box').hide(); 
     }
 
