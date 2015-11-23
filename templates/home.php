@@ -3,10 +3,10 @@
 ?>
 <html>
 	<head>
-		<link rel="stylesheet" href="../bootstrap.css" type="text/css">
-		<link rel="stylesheet" href="../datatables.css" type="text/css">
-		<link rel="stylesheet" href="../my.css" type="text/css">
-		<link rel="stylesheet" href="fonts/*" type="text/css">
+		<link rel="stylesheet" href="../css/bootstrap.css" type="text/css">
+		<link rel="stylesheet" href="../css/datatables.css" type="text/css">
+		<link rel="stylesheet" href="../css/my.css" type="text/css">
+		<!--<link rel="stylesheet" href="../fonts/*" type="text/css">-->
 	</head>
 	<body>
 		 
@@ -166,10 +166,10 @@
 
 	</div>
 
-		<script type="text/javascript" src="../templates/jquery.min.js"></script>
-		<script type="text/javascript" src="../templates/bootstrap.js"></script>
-		<script type="text/javascript" src="../templates/datatables.min.js"></script>
-		<script type="text/javascript" src="../templates/bootstrap-datepicker.min.js"></script>
-		<script type="text/javascript" src="../templates/home.js"></script>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/bootstrap.js"></script>
+		<script type="text/javascript" src="../js/datatables.min.js"></script>
+		<script type="text/javascript" src="../js/bootstrap-datepicker.min.js"></script>
+		<script type="text/javascript" src="../js/home.js"></script>
 	</body>
 <html>

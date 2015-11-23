@@ -47,7 +47,6 @@ $( document ).ready(function() {
 
     function createTable(dataObj, clickCallBack){
     	var columnNames = dataObj['columns'], data = dataObj['data'];
-    	console.log(columnNames);
     	var table = $('<table/>',{id:'results_table',class:'display',cellspacing:'0',width:'100%'}),
 		thead = $('<thead/>'), tr = $('<tr/>');
 
@@ -66,9 +65,7 @@ $( document ).ready(function() {
 		for(var row_key in data){
 			tr = $('<tr/>');
 			var row = data[row_key];
-			console.log(row);
 			for(var column in columnNames){
-				console.log(column);
 				var td = $('<td/>').append(row[columnNames[column]]);
 				tr.append(td);
 			}
@@ -237,8 +234,6 @@ $( document ).ready(function() {
 
     function logout(){
         _get('/validate',null,function(dataObj){
-            // console.log(dataObj);
-            //if true
             if(dataObj['status']==1){console.log('logging out');
 
                 //unset and log out
@@ -283,8 +278,8 @@ $( document ).ready(function() {
             type:'POST',
             data:params,
             success:function(response){
-                console.log('----');
-                console.log(response);
+                // console.log('----');
+                // console.log(response);
             },
             headers: {
                 "Content-Type":"application/x-www-form-urlencoded",

@@ -11,8 +11,8 @@ if(isset($_SESSION['user_access'])){
 
 <html>
 	<head>
-		<link rel="stylesheet" href="bootstrap.css" type="text/css">
-		<link rel="stylesheet" href="my.css" type="text/css">
+		<link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+		<link rel="stylesheet" href="css/my.css" type="text/css">
 	</head>
 	<body>
 		<div class="main-container">
@@ -59,8 +59,8 @@ if(isset($_SESSION['user_access'])){
 			</form>
 
 		</div>
-		<script type="text/javascript" src="templates/jquery.min.js"></script>
-		<script type="text/javascript" src="templates/bootstrap.js"></script>
-		<script type="text/javascript" src="templates/login.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.js"></script>
+		<script type="text/javascript" src="js/login.js"></script>
 	</body>
 </html>
