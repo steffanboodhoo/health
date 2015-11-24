@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set('Atlantic/Bermuda');
 ?>
 <html>
 	<head>
