@@ -5,9 +5,11 @@ $salt = 'salty salty salt';
 function getAll(){
 	$db = new dbQuery();
 	$results = $db->getAll();
+	$columns = array('0'=>'id','1'=>'age','2'=>'sex','3'=>'address','4'=>'onset','5'=>'seen','6'=>'referral','7'=>'diagnosis','8'=>'symptoms','9'=>'notes');
 	$return_obj = array(
 		'data' => $results,
-		'columns' => ['id','age','sex','address','onset','seen','referral','diagnosis','symptoms','notes']
+		// 'columns' => ['id','age','sex','address','onset','seen','referral','diagnosis','symptoms','notes']
+		'columns' => $columns
 	);
 	return json_encode($return_obj);
 }
