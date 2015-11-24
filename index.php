@@ -2,7 +2,7 @@
 
 require 'vendor/autoload.php';
 include 'manager.php';
-
+date_default_timezone_set('Atlantic/Bermuda');
 $app = new \Slim\Slim();
  $app->config(array(
     'debug' => true,
