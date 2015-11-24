@@ -17,10 +17,11 @@ function getAll(){
 function createSubject($dataObj){
 	$dataObj['onset'] = date ("Y-m-d", $dataObj['onset']);
 	$dataObj['seen'] = date ("Y-m-d", $dataObj['seen']);
-	print_r($dataObj);
+	//print_r($dataObj);
 	$db = new dbQuery();
 	$resp = $db->insert($dataObj);
-	return $resp;
+	$return_obj['status']=$resp;
+	return json_encode($return_obj);
 }
 
 function update($dataObj,$constraintObj){

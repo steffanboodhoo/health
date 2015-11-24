@@ -160,10 +160,21 @@
 	          <!-- END CUSTOM TABS -->
 	    </section><!-- /.content -->
 
-	    <div id="err_box" class="alert alert-danger" role="alert" >
+	    <div id="err_box"  class="hide alert alert-danger" role="alert" >
 			  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 			  <span class="sr-only">Error:</span>
 			  You do not have access, please login by clicking the login button to the top right
+		</div>
+
+		 <div id="success_box"  class="hide alert alert-success" role="alert" >
+			  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+			  <span class="sr-only">Success:</span>
+			  You have inserted/updated the subject's data
+		</div>
+		<div id="warn_box"  class="hide alert alert-warning" role="alert" >
+			  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+			  <span class="sr-only">Warning:</span>
+			  Could not insert/update subject's data
 		</div>
 
 	</div>

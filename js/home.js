@@ -22,9 +22,11 @@ $( document ).ready(function() {
     		
     		$('.date_field').datepicker();
     	})();
+
+
         _get('/validate',null,function(dataObj){
             
-            toggleBox(false);
+            toggleErrBox(false);
             $("#btn_access").attr('title', 'Login');
             if(dataObj['status']==1){
                 access = true;
@@ -38,7 +40,7 @@ $( document ).ready(function() {
     		if(access)
                 insert();
             else
-                toggleBox(true);
+                toggleErrBox(true);
     	});
 
         $('#btn_access').click(function(){
@@ -46,7 +48,7 @@ $( document ).ready(function() {
         });
 
         $('.nav').click(function(){
-            toggleBox(false);
+            toggleErrBox(false);
         })
 
     })();
@@ -87,7 +89,7 @@ $( document ).ready(function() {
 		var table = $('#results_table').DataTable();
 		$('#results_table tbody').on( 'click', 'button', function () {  	
         	if(!access){
-                toggleBox(true);
+                toggleErrBox(true);
                 return;
             }
             var data = table.row( $(this).parents('tr') ).data();
@@ -151,8 +153,15 @@ $( document ).ready(function() {
         if(dataObj['lat']=="")
             dataObj['lat']="0";
 
-        _post('/subject',dataObj,null);  
-        document.getElementById("insert_form").reset();  //!!!!!!!!!!
+        _post('/subject',dataObj,function(resp){
+            if(resp['status']==1){
+                document.getElementById("insert_form").reset();  //!!!!!!!!!!
+                toggleSuccBox(true);
+            }else{
+                toggleWarnBox(true);
+            }
+        });  
+        
     }
 
 
@@ -247,7 +256,7 @@ $( document ).ready(function() {
             if(access)
                 update({'id':oldRec['id']});
             else
-                toggleBox(true);
+                toggleErrBox(true);
         })
     	
         function cdiv(opt,old){
@@ -309,8 +318,11 @@ $( document ).ready(function() {
             type:'POST',
             data:params,
             success:function(response){
-                // console.log('----');
-                // console.log(response);
+                console.log(response);
+                if(typeof call_back==='function')
+                    call_back(JSON.parse(response))
+                else
+                    console.log(JSON.parse(response))
             },
             headers: {
                 "Content-Type":"application/x-www-form-urlencoded",
@@ -318,14 +330,32 @@ $( document ).ready(function() {
         })
     }
 
-    function toggleBox(visbility){
+    function toggleErrBox(visbility){
         if(visbility){
-            $('#err_box').show(); 
+            $('#err_box').addClass('show').removeClass('hide');
             $('html, body').animate({
                 scrollTop: $("#err_box").offset().top
             }, 500);
         }else
-            $('#err_box').hide(); 
+            $('#err_box').addClass('hide').removeClass('show'); 
+    }
+    function toggleSuccBox(visbility){
+        if(visbility){
+            $('#success_box').addClass('show').removeClass('hide');
+            $('html, body').animate({
+                scrollTop: $("#success_box").offset().top
+            }, 500);
+        }else
+            $('#success_box').addClass('hide').removeClass('show'); 
+    }
+     function toggleWarnBox(visbility){
+        if(visbility){
+            $('#warn_box').addClass('show').removeClass('hide');
+            $('html, body').animate({
+                scrollTop: $("#success_box").offset().top
+            }, 500);
+        }else
+            $('#warn_box').addClass('hide').removeClass('show'); 
     }
 
 

@@ -1,3 +1,10 @@
 .main-container{
 	padding: 3%;
 }
+
+.hide{
+	display:none;
+}
+.show{
+	display:block;
+}

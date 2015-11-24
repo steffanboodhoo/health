@@ -28,13 +28,17 @@ Class dbQuery{
 		global $conn;
 		$query_str = "create table if not exists subject( id int not null auto_increment, age int, sex char(1), onset date, seen date, address varchar (150), lon float, lat float, phone int, diagnosis varchar (150), referral char(1), symptoms varchar (150), notes varchar(500), primary key (id)) ";
 		$resp = $conn->query($query_str);
-		return $resp;
+		if($resp)
+			return 1;
+		return 0;
 	}
 	function createUser(){
 		global $conn;
 		$query_str = "create table if not exists users( username varchar(50) not null, password varchar(50) not null, primary key(username));";
 		$resp = $conn->query($query_str);
-		return $resp;
+		if($resp)
+			return 1;
+		return 0;
 	}
 	function validate($username, $password){
 		global $conn;
@@ -49,7 +53,9 @@ Class dbQuery{
 		$query_str = $query_str.$dataObj['lat'].','.$dataObj['phone'].',\''.$dataObj['diagnosis'].'\',\''.$dataObj['referral'].'\',\''.$dataObj['symptoms'].'\',\''.$dataObj['notes'].'\');';
 		
 		$resp = $conn->query($query_str);
-		return $resp;	
+		if($resp)
+			return 1;
+		return 0;	
 	}
 
 	function modify($updateVals, $constraints){
