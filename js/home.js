@@ -23,11 +23,15 @@ $( document ).ready(function() {
     		$('.date_field').datepicker();
     	})();
         _get('/validate',null,function(dataObj){
+            
             toggleBox(false);
             $("#btn_access").attr('title', 'Login');
             if(dataObj['status']==1){
                 access = true;
                 $("#btn_access").attr('title', 'Logout');
+                $('#btn_access').append($('<span/>',{'class':'glyphicon glyphicon-user','aria-hidden':'true'}));
+            }else{
+                $('#btn_access').append($('<span/>',{'class':'glyphicon glyphicon-off','aria-hidden':'true'}));
             }
         })
     	$('#btn_save').click(function(){
@@ -251,7 +255,7 @@ $( document ).ready(function() {
                 //redirect
                 
                 var getUrl = window.location.origin;
-                getUrl+='/health/'
+                // getUrl+='/health/'
                 console.log(getUrl);
                 window.location = getUrl;
             }   
@@ -259,7 +263,7 @@ $( document ).ready(function() {
     }
 
      function _get(url,params,call_back){
-        var adj_url = '/health/index.php'+url;
+        var adj_url = '/index.php'+url;
         console.log(adj_url);
         $.ajax({
             url:adj_url,
@@ -277,7 +281,7 @@ $( document ).ready(function() {
         })
     }
     function _post(url,params,call_back){
-        var adj_url = '/health/index.php'+url;
+        var adj_url = '/index.php'+url;
         console.log(adj_url);
         $.ajax({
             url:adj_url,

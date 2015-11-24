@@ -1,6 +1,4 @@
 $( document ).ready(function() {
-    var baseurl = 'http://localhost/health';
-    // _get('/test',null,null); works
     
     (function(){
     	$('#btn_login').click(function(){
@@ -8,11 +6,18 @@ $( document ).ready(function() {
     	});
     	$('#btn_guest').click(function(){
     		var getUrl = window.location.origin;
-            getUrl+='/health/index.php/home';
+            getUrl+='/index.php/home';
             window.location = getUrl;
     	});
         $('#err_box').hide();
     })();
+
+    $('body').keypress(function(e){
+        if(e.which == 13){//Enter key pressed
+           login();
+        }
+    });
+
     function login(){
     	var dataObj = {};
     	dataObj['username'] = $('#input_username').val();
@@ -21,7 +26,7 @@ $( document ).ready(function() {
     	_post('/login',dataObj,function(data){
     		if(data['status']==1){
                 var getUrl = window.location.origin;
-                getUrl+='/health/index.php/home';
+                getUrl+='/index.php/home';
                 window.location = getUrl;
             }
             $('#err_box').show(); 
@@ -30,7 +35,7 @@ $( document ).ready(function() {
     }
 
     function _get(url,params,call_back){
-        var adj_url = '/health/index.php'+url;
+        var adj_url = '/index.php'+url;
         console.log(adj_url);
         $.ajax({
             url:adj_url,
@@ -48,7 +53,7 @@ $( document ).ready(function() {
         })
     }
     function _post(url,params,call_back){
-        var adj_url = '/health/index.php'+url;
+        var adj_url = '/index.php'+url;
         console.log(adj_url);
         $.ajax({
             url:adj_url,

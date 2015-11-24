@@ -14,7 +14,7 @@
 	<div class="col-sm-9"></div>
 	<div class="col-sm-3">
 		<button type="button" id ="btn_access" class="btn btn-default btn-lg">
-			<span id="icon_login" class="glyphicon glyphicon-off" aria-hidden="true"></span>
+			<!--span id="icon_login" class="glyphicon glyphicon-off" aria-hidden="true"></span-->
 		</button>
 	</div>
 	<div class="container-fluid main-container">
