@@ -28,10 +28,11 @@ $( document ).ready(function() {
                 var getUrl = window.location.origin;
                 getUrl+='/index.php/home';
                 window.location = getUrl;
-            }
-            $('#err_box').show(); 
-            console.log('hello fellow');  
-    	})
+            }else{
+                $('#err_box').show(); 
+                console.log('hello fellow');  
+    	   }
+        })
     }
 
     function _get(url,params,call_back){

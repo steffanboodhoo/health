@@ -3,7 +3,8 @@
 
 if(isset($_SESSION['user_access'])){
 	if($_SESSION['user_access']){
-		header("Location: http://localhost/index.php/home");
+		$url = "http://health.lab.tt/index.php/home";
+		header("Location: $url");
 		die();
 	}
 }else{

@@ -130,10 +130,31 @@ $( document ).ready(function() {
         dataObj['seen'] = dates[1];
         dataObj['lon'] = $('#input_lon').val();
         dataObj['lat'] = $('#input_lat').val();
+        
         console.log(dataObj);
+        if(dataObj['name']=="")
+            dataObj['name']="unknown";
+        if(dataObj['age']=="")
+            dataObj['age']="0";
+        if(dataObj['phone']=="")
+            dataObj['phone']="0";
+        if(dataObj['address']=="")
+            dataObj['address']="unknown";
+        if(dataObj['diagnosis']=="")
+            dataObj['diagnosis']="unknown";
+        if(dataObj['symptoms']=="")
+            dataObj['symptoms']="unknown";
+        if(dataObj['notes']=="")
+            dataObj['notes']="unknown";
+        if(dataObj['lon']=="")
+            dataObj['lon']="0";
+        if(dataObj['lat']=="")
+            dataObj['lat']="0";
+
         _post('/subject',dataObj,null);  
-        document.getElementById("insert_form").reset();  
+        document.getElementById("insert_form").reset();  //!!!!!!!!!!
     }
+
 
     function update(constraints){
         var dataObj = {};
