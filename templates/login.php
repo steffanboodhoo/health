@@ -1,7 +1,7 @@
 <?php
 if(isset($_SESSION['user_access'])){
 	if($_SESSION['user_access']){
-		header("Location: http://localhost/health/index.php/home");
+		header("Location: http://localhost/index.php/home");
 		die();
 	}
 }else{
