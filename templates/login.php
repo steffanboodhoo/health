@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set('Atlantic/Bermuda');
+
 
 if(isset($_SESSION['user_access'])){
 	if($_SESSION['user_access']){

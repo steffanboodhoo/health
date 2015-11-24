@@ -68,6 +68,7 @@ class SessionCookie extends \Slim\Middleware
      */
     public function __construct($settings = array())
     {
+        date_default_timezone_set('Atlantic/Bermuda');
         $defaults = array(
             'expires' => '20 minutes',
             'path' => '/',
