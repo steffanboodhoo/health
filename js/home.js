@@ -79,34 +79,51 @@ $( document ).ready(function() {
 				tr.append(td);
 			}
 			//create buttons for action field
-			var btn = $('<button/>',{"class":"btn btn-default"}).append($('<span/>',{"class":"glyphicon glyphicon-wrench"}));
-			tr.append($('<td/>').append(btn));
+			var btn = $('<button/>',{"class":"btn-delete btn btn-default","data-toggle":"modal","data-target":"#modal_delete"}).append($('<span/>',{"class":"glyphicon glyphicon-remove"}));
+            var div = $('<div/>');
+            div.append(btn);
+            btn = $('<button/>',{"class":"btn-edit btn btn-default"}).append($('<span/>',{"class":"glyphicon glyphicon-wrench"}));
+            div.append(btn);
+            tr.append($('<td/>').append(div));
 			tbody.append(tr);
 		}
 		table.append(thead);table.append(tbody);
 		$('#table_container').append(table);
 
 		var table = $('#results_table').DataTable();
-		$('#results_table tbody').on( 'click', 'button', function () {  	
-        	if(!access){
+        //BUTTONS
+		$('#results_table tbody button').on( 'click',function (event) {  
+            if(!access){
                 toggleErrBox(true);
                 return;
             }
+            //preparing data
             var data = table.row( $(this).parents('tr') ).data();
-        	data.pop(10);
-        	var dataObj = {};
-        	dataObj['id'] = data[0];
-        	dataObj['age'] = data[1];
-        	dataObj['sex'] = data[2];
-        	dataObj['address'] = data[3];
-        	// dataObj['phone'] = data[4];
-        	dataObj['onset'] = data[4];
-        	dataObj['seen'] = data[5];
-        	dataObj['referral'] = data[6];
-        	dataObj['diagnosis'] = data[7];
-        	dataObj['symptoms'] = data[8];
-        	dataObj['notes'] = data[9];
-        	navToEdit(dataObj);
+            data.pop(10);//!!!!!!!!!!!!!!!!!!!!!
+            var dataObj = {};
+            dataObj['id'] = data[0];
+            dataObj['age'] = data[1];
+            dataObj['sex'] = data[2];
+            dataObj['address'] = data[3];
+            dataObj['onset'] = data[4];
+            dataObj['seen'] = data[5];
+            dataObj['referral'] = data[6];
+            dataObj['diagnosis'] = data[7];
+            dataObj['symptoms'] = data[8];
+            dataObj['notes'] = data[9];
+
+            var opt = event.currentTarget.className;
+            if(opt.indexOf("btn-delete")>-1){
+                var bodeh = JSON.stringify(dataObj);
+                $('#modal_delete_body').empty().append(bodeh);
+                $('#btn_delete_confirm').unbind( "click" );//removes previously bound interaction
+                $('#btn_delete_confirm').click(function(){//add current interaction
+                    console.log(dataObj['id']+" deleted");
+                });
+            }else if(opt.indexOf("btn-edit")>-1){
+                
+            	navToEdit(dataObj);
+            }
     	});
 
     }

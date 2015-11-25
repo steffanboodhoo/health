@@ -8,8 +8,8 @@ Class dbQuery{
 
 	function __construct(){
 		global $conn, $user, $pass, $db, $host;
-		// $user = "root";$pass = "admin";$host = "localhost";$db="moodledb";
-		$user = "steffan";$pass = "chikungunyavirus";$host = "localhost";$db="chikv";
+		$user = "root";$pass = "admin";$host = "localhost";$db="moodledb";
+		// $user = "steffan";$pass = "chikungunyavirus";$host = "localhost";$db="chikv";
 		$conn = new mysqli($host, $user, $pass, $db);
 		if($conn -> connect_errno){
 			echo "failed to connect to mysql:(". $conn->connect_errno .") ".$mysql->connect_error;
@@ -89,6 +89,15 @@ Class dbQuery{
 		}
 		return $results;
 	} 
+
+	function delete($id){
+		global $conn;
+		$query_str = ' delete from subject where id = \''.$id.'\'';
+		$resp = $conn->query($query_str);
+		if($resp)
+			return 1;
+		return 0;	
+	}
 }//end of class
 
 ?>
