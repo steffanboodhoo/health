@@ -8,8 +8,8 @@ Class dbQuery{
 
 	function __construct(){
 		global $conn, $user, $pass, $db, $host;
-		$user = "root";$pass = "admin";$host = "localhost";$db="moodledb";
-		// $user = "steffan";$pass = "chikungunyavirus";$host = "localhost";$db="chikv";
+		// $user = "root";$pass = "admin";$host = "localhost";$db="moodledb";
+		$user = "steffan";$pass = "chikungunyavirus";$host = "localhost";$db="chikv";
 		$conn = new mysqli($host, $user, $pass, $db);
 		if($conn -> connect_errno){
 			echo "failed to connect to mysql:(". $conn->connect_errno .") ".$mysql->connect_error;
