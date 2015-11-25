@@ -206,7 +206,10 @@ $( document ).ready(function() {
         postObj['constraint'] = constraints;
         console.log(postObj);
         document.getElementById("update_form").reset();
-        _post('/subject/update',postObj,null);
+        _post('/subject/update',postObj,function(resp){
+            if(resp['status']==1)
+                toggleSuccBox(true);
+        });
     }
 
     function navToEdit(oldRec){

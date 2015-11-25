@@ -84,7 +84,7 @@ $app->post('/subject/update',function() use ($app){
 	$allPostVars = $app->request->post();
 	$updateObj = $allPostVars['update']; 
 	$constraints = $allPostVars['constraint'];
-	update($updateObj, $constraints);//in manager.php
+	echo update($updateObj, $constraints);//in manager.php
 });
 $app->post('/login',function() use ($app){
 	$allPostVars = $app->request->post();

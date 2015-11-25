@@ -37,7 +37,9 @@ function update($dataObj,$constraintObj){
 	$dataObj['onset'] = '\''.$dataObj['onset'].'\'';
 	$dataObj['seen'] = '\''.$dataObj['seen'].'\'';
 	$db = new dbQuery();
-	$db->modify($dataObj,$constraintObj);
+	$resp = $db->modify($dataObj,$constraintObj);
+	$return_obj['status']=$resp;
+	return json_encode($return_obj);	
 }
 // dave chickpass1
 function login($username, $password){

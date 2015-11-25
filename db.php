@@ -74,7 +74,9 @@ Class dbQuery{
 		}
 		$query_str = $query_str.";";
 		$resp = $conn->query($query_str);
-		return $resp;
+		if($resp)
+			return 1;
+		return 0;	
 	}
 
 	function getAll(){
