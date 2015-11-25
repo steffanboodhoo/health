@@ -90,7 +90,7 @@ Class dbQuery{
 		return $results;
 	} 
 
-	function delete($id){
+	function delete_subject($id){
 		global $conn;
 		$query_str = ' delete from subject where id = \''.$id.'\'';
 		$resp = $conn->query($query_str);

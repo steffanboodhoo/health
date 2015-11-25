@@ -98,7 +98,8 @@ $( document ).ready(function() {
                 return;
             }
             //preparing data
-            var data = table.row( $(this).parents('tr') ).data();
+            var row = table.row( $(this).parents('tr') );
+            var data = row.data();
             data.pop(10);//!!!!!!!!!!!!!!!!!!!!!
             var dataObj = {};
             dataObj['id'] = data[0];
@@ -118,7 +119,11 @@ $( document ).ready(function() {
                 $('#modal_delete_body').empty().append(bodeh);
                 $('#btn_delete_confirm').unbind( "click" );//removes previously bound interaction
                 $('#btn_delete_confirm').click(function(){//add current interaction
-                    console.log(dataObj['id']+" deleted");
+                    // console.log(dataObj['id']+" deleted");
+                    _get('/subject/delete/'+dataObj['id'],null,function(resp){
+                        if(resp['status']==1)
+                            row.remove().draw();
+                    });
                 });
             }else if(opt.indexOf("btn-edit")>-1){
                 
@@ -317,6 +322,7 @@ $( document ).ready(function() {
             type:'GET',
             data:params,
             success:function(response){
+                console.log(response)
                 if(typeof call_back==='function')
                     call_back(JSON.parse(response))
                 else

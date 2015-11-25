@@ -15,11 +15,27 @@ $app->add(new \Slim\Middleware\SessionCookie(array(
     'secure' => false,
     'httponly' => false,
     'name' => 'slim_session',
-    'secret' => 'CHANGE_ME',
+    'secret' => 'SPECIAL_STUFF',
     'cipher' => MCRYPT_RIJNDAEL_256,
     'cipher_mode' => MCRYPT_MODE_CBC
 )));
+//----------
+ if (isset($_SERVER['HTTP_ORIGIN'])) {
+        header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+        header('Access-Control-Allow-Credentials: true');
+        header('Access-Control-Max-Age: 86400');    // cache for 1 day
+    }
+    // Access-Control headers are received during OPTIONS requests
+    if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
+        if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
+            header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");         
+
+        if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
+            header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+
+    }
+    //----------
 
 ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
@@ -77,6 +93,10 @@ $app->post('/login',function() use ($app){
 	$returnObj['status'] = $_SESSION['user_access'];// 0 false, > 0 true
 	echo json_encode($returnObj);
 });
-
+$app->get('/subject/delete/:id', function ($id) {
+	if($_SESSION['user_access']==1){
+    	echo deleteSubject($id);
+	}
+});
 
 $app->run();

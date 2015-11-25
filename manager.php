@@ -52,4 +52,11 @@ function login($username, $password){
 	return 0;
 }
 
+function deleteSubject($id){
+	$db = new dbQuery();
+	$resp = $db->delete_subject($id);
+	$return_obj['status'] = $resp;
+	return json_encode($return_obj);
+}	
+
 ?>
