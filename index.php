@@ -19,23 +19,7 @@ $app->add(new \Slim\Middleware\SessionCookie(array(
     'cipher' => MCRYPT_RIJNDAEL_256,
     'cipher_mode' => MCRYPT_MODE_CBC
 )));
-//----------
- if (isset($_SERVER['HTTP_ORIGIN'])) {
-        header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
-        header('Access-Control-Allow-Credentials: true');
-        header('Access-Control-Max-Age: 86400');    // cache for 1 day
-    }
-    // Access-Control headers are received during OPTIONS requests
-    if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
-        if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
-            header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");         
-
-        if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
-            header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
-
-    }
-    //----------
 
 ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
@@ -63,14 +47,12 @@ $app->get('/getAll',function(){
 });
 
 $app->get('/validate',function(){
-	global $_SESSION;
 	$returnObj['status'] = 0;
 	if(isset($_SESSION['user_access']))
 		$returnObj['status'] = $_SESSION['user_access'];
 	echo json_encode($returnObj);// 0 false > 0 true
 });
 $app->get('/logout',function(){
-	global $_SESSION;
 	$_SESSION['user_access'] = 0;
 	$returnObj['status']=1;
 	echo json_encode($returnObj);// 0 false > 0 true
@@ -88,7 +70,6 @@ $app->post('/subject/update',function() use ($app){
 });
 $app->post('/login',function() use ($app){
 	$allPostVars = $app->request->post();
-	global $_SESSION;
 	$_SESSION['user_access'] = login($allPostVars['username'], $allPostVars['password']); 
 	$returnObj['status'] = $_SESSION['user_access'];// 0 false, > 0 true
 	echo json_encode($returnObj);
@@ -100,3 +81,4 @@ $app->get('/subject/delete/:id', function ($id) {
 });
 
 $app->run();
+?>
