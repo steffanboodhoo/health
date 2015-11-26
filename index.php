@@ -11,7 +11,7 @@ $app = new \Slim\Slim();
 $app->add(new \Slim\Middleware\SessionCookie(array(
     'expires' => '20 minutes',
     'path' => '/',
-    'domain' => null,
+    'domain' => 'health.lab.tt',
     'secure' => false,
     'httponly' => false,
     'name' => 'slim_session',
