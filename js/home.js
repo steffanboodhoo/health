@@ -56,7 +56,7 @@ $( document ).ready(function() {
 
     function createTable(dataObj, clickCallBack){
     	var columnNames = dataObj['columns'], data = dataObj['data'];
-    	var table = $('<table/>',{id:'results_table',class:'display',cellspacing:'0',width:'100%'}),
+    	var table = $('<table/>',{'id':'results_table','class':'display','cellspacing':'0','width':'100%'}),
 		thead = $('<thead/>'), tr = $('<tr/>');
 
 		//head [creation/init]

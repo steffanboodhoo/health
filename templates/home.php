@@ -1,5 +1,7 @@
 <?php
-
+if(!isset($_SESSION)){ 
+        session_start(); 
+} 
 ?>
 <html>
 	<head>
@@ -205,4 +207,4 @@
 		<script type="text/javascript" src="../js/bootstrap-datepicker.min.js"></script>
 		<script type="text/javascript" src="../js/home.js"></script>
 	</body>
-<html>
+</html>
