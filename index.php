@@ -8,17 +8,7 @@ $app = new \Slim\Slim();
     'debug' => true,
     'templates.path' => './templates'
 ));
-$app->add(new \Slim\Middleware\SessionCookie(array(
-    'expires' => '20 minutes',
-    'path' => '/',
-    'domain' => 'health.lab.tt',
-    'secure' => false,
-    'httponly' => false,
-    'name' => 'slim_session',
-    'secret' => 'SPECIAL_STUFF',
-    'cipher' => MCRYPT_RIJNDAEL_256,
-    'cipher_mode' => MCRYPT_MODE_CBC
-)));
+$app->add(new \Slim\Middleware\SessionCookie());
 
 
 ini_set('display_errors',1);
