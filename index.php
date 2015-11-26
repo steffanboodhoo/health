@@ -8,7 +8,17 @@ $app = new \Slim\Slim();
     'debug' => true,
     'templates.path' => './templates'
 ));
-$app->add(new \Slim\Middleware\SessionCookie());
+$app->add(new \Slim\Middleware\SessionCookie(array(
+    'expires' => '60 minutes',
+    'path' => '/',
+    'domain' => null,
+    'secure' => false,
+    'httponly' => false,
+    'name' => 'slim_session',
+    'secret' => 'SPECIAL_STUFF',
+    'cipher' => MCRYPT_RIJNDAEL_256,
+    'cipher_mode' => MCRYPT_MODE_CBC
+)));
 
 
 ini_set('display_errors',1);
