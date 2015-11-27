@@ -310,7 +310,7 @@ $( document ).ready(function() {
                 //redirect
                 
                 // var baseUrl = "http://localhost";
-                var baseUrl = "http://health.lab.tt"
+                var baseUrl = "http://health.lab.tt" 
                 // var getUrl = window.location.origin;
                 window.location = baseUrl;
             }   

@@ -4,8 +4,8 @@ if(!isset($_SESSION)){
 } 
 if(isset($_SESSION['user_access'])){
 	if($_SESSION['user_access']){
-		$url = "http://localhost/index.php/home";
-		// $url = "http://health.lab.tt/index.php/home";
+		// $url = "http://localhost/index.php/home";
+		$url = "http://health.lab.tt/index.php/home";
 		header("Location: $url");
 		die();
 	}
