@@ -309,10 +309,10 @@ $( document ).ready(function() {
             }else{console.log('redirecting');
                 //redirect
                 
-                var getUrl = window.location.origin;
-                // getUrl+='/health/'
-                console.log(getUrl);
-                window.location = getUrl;
+                // var baseUrl = "http://localhost";
+                var baseUrl = "http://health.lab.tt"
+                // var getUrl = window.location.origin;
+                window.location = baseUrl;
             }   
         })
     }

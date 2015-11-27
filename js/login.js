@@ -25,9 +25,11 @@ $( document ).ready(function() {
     	console.log(dataObj);
     	_post('/login',dataObj,function(data){
     		if(data['status']==1){
-                var getUrl = window.location.origin;
-                getUrl+='/index.php/home';
-                window.location = getUrl;
+                // var baseUrl = "http://localhost";
+                var baseUrl = "http://health.lab.tt"
+                // var getUrl = window.location.origin;
+                var getUrl = baseUrl+'/index.php/home';
+                window.location = baseUrl;
             }else{
                 $('#err_box').show(); 
                 console.log('hello fellow');  
