@@ -51,6 +51,9 @@ $( document ).ready(function() {
             toggleErrBox(false);
         })
 
+        _get('/getAll',null,function(dataObj){createTable(dataObj,null)});
+        // $('')
+
     })();
 
 
@@ -134,9 +137,6 @@ $( document ).ready(function() {
     }
 
    
-
-    _get('/getAll',null,function(dataObj){createTable(dataObj,null)});
-
     function insert(){
         var dataObj = {};
         dataObj['name'] = $('#input_name').val();
