@@ -52,7 +52,11 @@ $( document ).ready(function() {
         })
 
         _get('/getAll',null,function(dataObj){createTable(dataObj,null)});
-        // $('')
+        $('#nav_tabs #ti0 a').click(function(){
+            console.log("display clicked");
+            $('#table_container').empty();
+            _get('/getAll',null,function(dataObj){createTable(dataObj,null)});
+        })
 
     })();
 
@@ -207,8 +211,10 @@ $( document ).ready(function() {
         console.log(postObj);
         document.getElementById("update_form").reset();
         _post('/subject/update',postObj,function(resp){
-            if(resp['status']==1)
+            if(resp['status']==1){
+                navToEdit(dataObj);
                 toggleSuccBox(true);
+            }
         });
     }
 
