@@ -1,3 +1,16 @@
+@import url(http://fonts.googleapis.com/css?family=Antic+Slab);
+
 .main-container{
 	padding: 3%;
+}
+
+h1 {
+  font-family: 'Antic Slab', serif;
+  font-size:80px;
+  color:#DDCCEE;
+}
+
+.container-full a {
+  color:#efefef;
+  text-decoration:none;
 }

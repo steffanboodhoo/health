@@ -15,11 +15,15 @@ if(!isset($_SESSION)){
 	<body>
 		 
 <!-- Main content -->
-	<div class="col-sm-9"></div>
-	<div class="col-sm-3">
-		<button type="button" id ="btn_access" class="btn btn-default btn-lg">
-			<!--span id="icon_login" class="glyphicon glyphicon-off" aria-hidden="true"></span-->
-		</button>
+	<div class="row jumbotron container-fluid">
+		<div class="col-sm-9 ">
+			<h1>Chikungunya Virus Tracking</h1>
+		</div>
+		<div class="col-sm-3">
+			<button type="button" id ="btn_access" class="btn btn-default btn-lg jumbotron">
+				<!--span id="icon_login" class="glyphicon glyphicon-off" aria-hidden="true"></span-->
+			</button>
+		</div>
 	</div>
 	<div class="container-fluid main-container">
 	    <section class="content">
