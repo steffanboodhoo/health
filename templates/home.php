@@ -17,10 +17,10 @@ if(!isset($_SESSION)){
 <!-- Main content -->
 	<div class="row jumbotron container-fluid">
 		<div class="col-sm-9 ">
-			<h1>Chikungunya Virus Tracking</h1>
+			<h3>Chikungunya Virus Tracking</h3>
 		</div>
 		<div class="col-sm-3">
-			<button type="button" id ="btn_access" class="btn btn-default btn-lg jumbotron">
+			<button type="button" id ="btn_access" class="btn btn-default btn-lg ">
 				<!--span id="icon_login" class="glyphicon glyphicon-off" aria-hidden="true"></span-->
 			</button>
 		</div>
@@ -35,7 +35,7 @@ if(!isset($_SESSION)){
 	                <ul class="nav nav-tabs nav-justified" id ='nav_tabs'>
 	                  <li id="ti0" class="ctabs active"><a id='link0' href="#tab_0" data-toggle="tab">Display</a></li>
 	                  <li id="ti1" class="ctabs" ><a id='link1' href="#tab_1" data-toggle="tab">Add</a></li>
-	                  <li id="ti2" class="ctabs" ><a id='link2' href="#tab_2" data-toggle="tab">Modify</a></li>
+	                  <!--<li id="ti2" class="ctabs" ><a id='link2' href="#tab_2" data-toggle="tab">Modify</a></li>-->
 	                </ul>
 	                <div class="tab-content">
 	                  <div class="tab-pane active" id="tab_0">

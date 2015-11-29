@@ -1,6 +1,7 @@
 <?php
 // include 'db.php';
 include 'manager.php';
+$salt = 'salty salty salt';
 // $db = new dbQuery();
 $mysqltime = date ("Y-m-d", 1448004564);
 $dataObj = array(
@@ -21,7 +22,10 @@ $dataObj = array(
 // $db->modify($dataObj,$constraintsObj);
 // update($dataObj,$constraintsObj);
 // $results = $db->getAll();
-login('dave','chickpass1');
+$password = "passgunya1";
+$hashedPass = hash('md5',$password.$salt);
+echo $hashedPass;
+// login('dave','chickpass1');
 //9ef9720585ec6a9af16c76f5fee34c55
 //9ef9720585ec6a9af16c76f5fee34c55
 echo "test\n";

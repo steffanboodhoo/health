@@ -232,7 +232,7 @@ $( document ).ready(function() {
 			document.getElementById(new_tab).className +" active"
 		tabs = document.getElementById('nav_tabs')
 		tabs.children[0].className = tabs.children[0].className.replace(/\bactive\b/,'');
-		tabs.children[2].className = tabs.children[2].className + " active"; 
+		// tabs.children[2].className = tabs.children[2].className + " active"; 
 	}	
 
     function createEdit(oldRec){

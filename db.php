@@ -1,9 +1,6 @@
 <?php
 Class dbQuery{
 	protected $user, $pass, $db, $host, $conn;
-	/*$user = "steffan";
-	$pass = "chikungunyavirus";
-	$db = "chickv";*/
 	
 
 	function __construct(){
