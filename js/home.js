@@ -320,8 +320,8 @@ $( document ).ready(function() {
             }else{console.log('redirecting');
                 //redirect
                 
-                var baseUrl = "http://localhost";
-                // var baseUrl = "http://health.lab.tt" 
+                // var baseUrl = "http://localhost";
+                var baseUrl = "http://health.lab.tt" 
                 // var getUrl = window.location.origin;
                 window.location = baseUrl;
             }   
