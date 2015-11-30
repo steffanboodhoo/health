@@ -14,3 +14,10 @@ h1 {
   color:#efefef;
   text-decoration:none;
 }
+
+.pg-title{
+	padding: 2%;
+}
+.pull-right{
+	float:right;
+}
