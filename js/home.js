@@ -135,7 +135,9 @@ $( document ).ready(function() {
                     });
                 });
             }else if(opt.indexOf("btn-edit")>-1){
-                
+                var re = /-/g;
+                dataObj['onset'] = date_conv(dataObj['onset'],"sqlString");
+                dataObj['seen'] = date_conv(dataObj['seen'],"sqlString");
             	navToEdit(dataObj);
             }
     	});
@@ -206,16 +208,16 @@ $( document ).ready(function() {
         dates = [dates[0].getTime()/1000,dates[1].getTime()/1000];
         dataObj['onset'] = dates[0];
         dataObj['seen'] = dates[1];
-        
         var postObj = {};
         postObj['update'] = dataObj;
         postObj['constraint'] = constraints;
         document.getElementById("update_form").reset();
         _post('/subject/update',postObj,function(resp){
-            if(resp['status']==1){
-                dataObj['onset'] = date_conv(new Date(dataObj['onset']),"dateObj");
-                dataObj['seen'] = date_conv(new Date(dataObj['seen']),"dateObj");
-                
+            if(resp['status']==1){ 
+                // var onset = new Date(), seen = new Date();
+                dataObj['onset'] = date_conv(new Date(dataObj['onset']*1000),"dateObj");
+                dataObj['seen'] = date_conv(new Date(dataObj['seen']*1000),"dateObj");
+                // console.log(Date(dataObj['onset']));
                 console.log(dataObj);
                 navToEdit(dataObj);
                 toggleSuccBox(true);
@@ -275,12 +277,12 @@ $( document ).ready(function() {
     	//------------------
     	var d7 = cdiv(2).appendTo(set);
     	$('<label/>',{"class":"col-md-4 control-label","for":"modify_onset"}).append("Onset").appendTo(d7);
-    	cdiv(1).append($('<input/>',{'class':'modify_date form-control input-md', 'id':'modify_onset','value': date_conv(oldRec['onset'],"sqlString") })).appendTo(d7);
+    	cdiv(1).append($('<input/>',{'class':'modify_date form-control input-md', 'id':'modify_onset','value': oldRec['onset']})).appendTo(d7);
     	cdiv(3,oldRec['onset']).appendTo(d7);
 
     	var d8 = cdiv(2).appendTo(set);
     	$('<label/>',{"class":"col-md-4 control-label","for":"modify_seen"}).append("Seen").appendTo(d8);
-    	cdiv(1).append($('<input/>',{'class':'modify_date form-control input-md', 'id':'modify_seen','value': date_conv(oldRec['seen'],"sqlString") })).appendTo(d8);
+    	cdiv(1).append($('<input/>',{'class':'modify_date form-control input-md', 'id':'modify_seen','value': oldRec['seen']})).appendTo(d8);
     	cdiv(3,oldRec['seen']).appendTo(d8);
     	$('.modify_date').datepicker();
 
@@ -336,7 +338,7 @@ $( document ).ready(function() {
             type:'GET',
             data:params,
             success:function(response){
-                console.log(response)
+                // console.log(response)
                 if(typeof call_back==='function')
                     call_back(JSON.parse(response))
                 else
@@ -355,7 +357,7 @@ $( document ).ready(function() {
             type:'POST',
             data:params,
             success:function(response){
-                console.log(response);
+                // console.log(response);
                 if(typeof call_back==='function')
                     call_back(JSON.parse(response))
                 else
