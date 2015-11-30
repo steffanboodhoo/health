@@ -49,6 +49,8 @@ $( document ).ready(function() {
 
         $('.nav').click(function(){
             toggleErrBox(false);
+            toggleSuccBox(false);
+            toggleWarnBox(false);
         })
 
         _get('/getAll',null,function(dataObj){createTable(dataObj,null)});
@@ -208,10 +210,13 @@ $( document ).ready(function() {
         var postObj = {};
         postObj['update'] = dataObj;
         postObj['constraint'] = constraints;
-        console.log(postObj);
         document.getElementById("update_form").reset();
         _post('/subject/update',postObj,function(resp){
             if(resp['status']==1){
+                dataObj['onset'] = date_conv(new Date(dataObj['onset']),"dateObj");
+                dataObj['seen'] = date_conv(new Date(dataObj['seen']),"dateObj");
+                
+                console.log(dataObj);
                 navToEdit(dataObj);
                 toggleSuccBox(true);
             }
@@ -270,12 +275,12 @@ $( document ).ready(function() {
     	//------------------
     	var d7 = cdiv(2).appendTo(set);
     	$('<label/>',{"class":"col-md-4 control-label","for":"modify_onset"}).append("Onset").appendTo(d7);
-    	cdiv(1).append($('<input/>',{'class':'modify_date form-control input-md', 'id':'modify_onset','value': oldRec['onset']})).appendTo(d7);
+    	cdiv(1).append($('<input/>',{'class':'modify_date form-control input-md', 'id':'modify_onset','value': date_conv(oldRec['onset'],"sqlString") })).appendTo(d7);
     	cdiv(3,oldRec['onset']).appendTo(d7);
 
     	var d8 = cdiv(2).appendTo(set);
     	$('<label/>',{"class":"col-md-4 control-label","for":"modify_seen"}).append("Seen").appendTo(d8);
-    	cdiv(1).append($('<input/>',{'class':'modify_date form-control input-md', 'id':'modify_seen','value': oldRec['seen']})).appendTo(d8);
+    	cdiv(1).append($('<input/>',{'class':'modify_date form-control input-md', 'id':'modify_seen','value': date_conv(oldRec['seen'],"sqlString") })).appendTo(d8);
     	cdiv(3,oldRec['seen']).appendTo(d8);
     	$('.modify_date').datepicker();
 
@@ -315,8 +320,8 @@ $( document ).ready(function() {
             }else{console.log('redirecting');
                 //redirect
                 
-                // var baseUrl = "http://localhost";
-                var baseUrl = "http://health.lab.tt" 
+                var baseUrl = "http://localhost";
+                // var baseUrl = "http://health.lab.tt" 
                 // var getUrl = window.location.origin;
                 window.location = baseUrl;
             }   
@@ -390,5 +395,12 @@ $( document ).ready(function() {
             $('#warn_box').addClass('hide').removeClass('show'); 
     }
 
-
+    function date_conv(date,type){
+        if(type=="dateObj")
+            return (date.getMonth()+1) + "/" +date.getDate()  + "/" + date.getFullYear();
+        if(type=="sqlString"){
+            date = date.split("-");// yy mm dd
+            return date[1]+"/"+date[2]+"/"+date[0]; 
+        }
+    }
 });
