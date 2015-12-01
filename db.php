@@ -5,8 +5,8 @@ Class dbQuery{
 
 	function __construct(){
 		global $conn, $user, $pass, $db, $host;
-		// $user = "root";$pass = "admin";$host = "localhost";$db="moodledb";
-		$user = "steffan";$pass = "chikungunyavirus";$host = "localhost";$db="chikv";
+		$user = "root";$pass = "admin";$host = "localhost";$db="moodledb";
+		// $user = "steffan";$pass = "chikungunyavirus";$host = "localhost";$db="chikv";
 		// $user = "root";$pass = "";$host = "localhost";$db="chikv";
 
 		$conn = new mysqli($host, $user, $pass, $db);
@@ -98,6 +98,19 @@ Class dbQuery{
 		if($resp)
 			return 1;
 		return 0;	
+	}
+
+	function user_query($query){
+		global $conn;
+		$resp = $conn->query($query);
+		// return  $resp;
+
+		$results = array();
+		while ($row = $resp->fetch_assoc()) {
+			unset($row['name']);
+		   	array_push($results,$row);
+		}
+		return $results;
 	}
 }//end of class
 

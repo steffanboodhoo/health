@@ -36,6 +36,7 @@ if(!isset($_SESSION)){
 	                  <li id="ti0" class="ctabs active"><a id='link0' href="#tab_0" data-toggle="tab">Display</a></li>
 	                  <li id="ti1" class="ctabs" ><a id='link1' href="#tab_1" data-toggle="tab">Add</a></li>
 	                  <!--<li id="ti2" class="ctabs" ><a id='link2' href="#tab_2" data-toggle="tab">Modify</a></li>-->
+	                  <li id="ti3" class="ctabs" ><a id='link3' href="#tab_3" data-toggle="tab">Query</a></li>
 	                </ul>
 	                <div class="tab-content">
 	                  <div class="tab-pane active" id="tab_0">
@@ -159,6 +160,16 @@ if(!isset($_SESSION)){
 	                    <div class="col-md-6"><h2>To edit a record, look for the desired record in display, and select the edit button</h2></div>
 	                  </div><!-- /.tab-pane -->
 	                 
+	                 <div class="tab-pane" id="tab_3">
+	                    <div class="col-md-12"> <h5>Enter mysql Query then click the button to the right</h5></div>
+	                    <div class="col-md-8 flex-cont"><textarea id="input_query"class="flex-input"></textarea></div>
+	                    <div class="col-md-4 flex-cont"><button id="btn_query" class="flex-input btn btn-default btn-lg">
+	                    	<span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+	                    </button></div>
+	                    
+	                    <div id="query_table" ></div>
+	                  </div><!-- /.tab-pane -->
+
 	                </div><!-- /.tab-content -->
 	              </div><!-- nav-tabs-custom -->
 	            </div><!-- /.col -->

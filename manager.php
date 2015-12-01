@@ -61,4 +61,16 @@ function deleteSubject($id){
 	return json_encode($return_obj);
 }	
 
+function user_query($params){
+	$db = new dbQuery();
+	$query = $params['query'];
+	$names = $params['names'];
+	$results = $db->user_query($query);
+	$return_obj = array(
+		'data' => $results,
+		'columns' => $names
+	);
+	return json_encode($return_obj);
+}
+
 ?>

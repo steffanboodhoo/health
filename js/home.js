@@ -53,19 +53,52 @@ $( document ).ready(function() {
             toggleWarnBox(false);
         })
 
-        _get('/getAll',null,function(dataObj){createTable(dataObj,null)});
+        _get('/getAll',null,function(dataObj){createTable('table_container',dataObj,true)});
         $('#nav_tabs #ti0 a').click(function(){
             console.log("display clicked");
             $('#table_container').empty();
-            _get('/getAll',null,function(dataObj){createTable(dataObj,null)});
+            _get('/getAll',null,function(dataObj){createTable('table_container',dataObj,true)});
         })
 
+        $('#btn_query').click(function(){
+            var query = $('#input_query').val();
+            var params = {};
+            params['query'] = query;
+            params['names'] = getNames(query);
+            // _get('/getAll',null,function(dataObj){createTable(dataObj,true)});
+            _get('/subject/query',params,function(dateObj){
+                console.log(dateObj);
+                createTable('query_table',dateObj,false)});
+
+            function getNames(str){
+                //cleaning tolkens
+                var clean_tolkens = [];
+                var tolkens = str.split(" ");
+                for( t in tolkens){
+                    tolkens[t].trim();
+                    tolk_sub = tolkens[t].split(",");
+                    for(ts in tolk_sub){
+                        if(tolk_sub[ts]!="")
+                            clean_tolkens.push(tolk_sub[ts]);
+                    }
+                }
+                //getting column names
+                var i = 1;
+                tolkens = [];
+                while(clean_tolkens[i] != "from"){
+                    tolkens.push(clean_tolkens[i++]);
+                }
+
+                return tolkens;
+            }
+            
+        })
     })();
 
 
-    function createTable(dataObj, clickCallBack){
+    function createTable(container, dataObj, tableOptions){
     	var columnNames = dataObj['columns'], data = dataObj['data'];
-    	var table = $('<table/>',{'id':'results_table','class':'display','cellspacing':'0','width':'100%'}),
+    	var table = $('<table/>',{'id':container+'_results_table','class':'display','cellspacing':'0','width':'100%'}),
 		thead = $('<thead/>'), tr = $('<tr/>');
 
 		//head [creation/init]
@@ -73,7 +106,8 @@ $( document ).ready(function() {
 			tr.append($('<th/>').append(el));
 		});
 		//this Column will be used for any buttons
-		tr.append($('<th/>').append('Action'));
+		if(tableOptions)
+            tr.append($('<th/>').append('Action'));
 
 		thead.append(tr);
 
@@ -88,59 +122,63 @@ $( document ).ready(function() {
 				tr.append(td);
 			}
 			//create buttons for action field
-			var btn = $('<button/>',{"class":"btn-delete btn btn-default","data-toggle":"modal","data-target":"#modal_delete"}).append($('<span/>',{"class":"glyphicon glyphicon-remove"}));
-            var div = $('<div/>');
-            div.append(btn);
-            btn = $('<button/>',{"class":"btn-edit btn btn-default"}).append($('<span/>',{"class":"glyphicon glyphicon-wrench"}));
-            div.append(btn);
-            tr.append($('<td/>').append(div));
-			tbody.append(tr);
-		}
+            if(tableOptions){
+    			var btn = $('<button/>',{"class":"btn-delete btn btn-default","data-toggle":"modal","data-target":"#modal_delete"}).append($('<span/>',{"class":"glyphicon glyphicon-remove"}));
+                var div = $('<div/>');
+                div.append(btn);
+                btn = $('<button/>',{"class":"btn-edit btn btn-default"}).append($('<span/>',{"class":"glyphicon glyphicon-wrench"}));
+                div.append(btn);
+                tr.append($('<td/>').append(div));
+    		}
+            tbody.append(tr);
+        }
 		table.append(thead);table.append(tbody);
-		$('#table_container').append(table);
+		$('#'+container).append(table);
 
-		var table = $('#results_table').DataTable();
+		var table = $('#'+container+'_results_table').DataTable();
         //BUTTONS
-		$('#results_table tbody button').on( 'click',function (event) {  
-            if(!access){
-                toggleErrBox(true);
-                return;
-            }
-            //preparing data
-            var row = table.row( $(this).parents('tr') );
-            var data = row.data();
-            data.pop(10);//!!!!!!!!!!!!!!!!!!!!!
-            var dataObj = {};
-            dataObj['id'] = data[0];
-            dataObj['age'] = data[1];
-            dataObj['sex'] = data[2];
-            dataObj['address'] = data[3];
-            dataObj['onset'] = data[4];
-            dataObj['seen'] = data[5];
-            dataObj['referral'] = data[6];
-            dataObj['diagnosis'] = data[7];
-            dataObj['symptoms'] = data[8];
-            dataObj['notes'] = data[9];
+        if(tableOptions){
+    		$('#results_table tbody button').on( 'click',function (event) {  
+                if(!access){
+                    toggleErrBox(true);
+                    return;
+                }
+                //preparing data
+                var row = table.row( $(this).parents('tr') );
+                var data = row.data();
+                data.pop(10);//!!!!!!!!!!!!!!!!!!!!!
+                var dataObj = {};
+                dataObj['id'] = data[0];
+                dataObj['age'] = data[1];
+                dataObj['sex'] = data[2];
+                dataObj['address'] = data[3];
+                dataObj['onset'] = data[4];
+                dataObj['seen'] = data[5];
+                dataObj['referral'] = data[6];
+                dataObj['diagnosis'] = data[7];
+                dataObj['symptoms'] = data[8];
+                dataObj['notes'] = data[9];
 
-            var opt = event.currentTarget.className;
-            if(opt.indexOf("btn-delete")>-1){
-                var bodeh = JSON.stringify(dataObj);
-                $('#modal_delete_body').empty().append(bodeh);
-                $('#btn_delete_confirm').unbind( "click" );//removes previously bound interaction
-                $('#btn_delete_confirm').click(function(){//add current interaction
-                    // console.log(dataObj['id']+" deleted");
-                    _get('/subject/delete/'+dataObj['id'],null,function(resp){
-                        if(resp['status']==1)
-                            row.remove().draw();
+                var opt = event.currentTarget.className;
+                if(opt.indexOf("btn-delete")>-1){
+                    var bodeh = JSON.stringify(dataObj);
+                    $('#modal_delete_body').empty().append(bodeh);
+                    $('#btn_delete_confirm').unbind( "click" );//removes previously bound interaction
+                    $('#btn_delete_confirm').click(function(){//add current interaction
+                        // console.log(dataObj['id']+" deleted");
+                        _get('/subject/delete/'+dataObj['id'],null,function(resp){
+                            if(resp['status']==1)
+                                row.remove().draw();
+                        });
                     });
-                });
-            }else if(opt.indexOf("btn-edit")>-1){
-                var re = /-/g;
-                dataObj['onset'] = date_conv(dataObj['onset'],"sqlString");
-                dataObj['seen'] = date_conv(dataObj['seen'],"sqlString");
-            	navToEdit(dataObj);
-            }
-    	});
+                }else if(opt.indexOf("btn-edit")>-1){
+                    var re = /-/g;
+                    dataObj['onset'] = date_conv(dataObj['onset'],"sqlString");
+                    dataObj['seen'] = date_conv(dataObj['seen'],"sqlString");
+                	navToEdit(dataObj);
+                }
+        	});
+        }
 
     }
 
@@ -322,8 +360,8 @@ $( document ).ready(function() {
             }else{console.log('redirecting');
                 //redirect
                 
-                // var baseUrl = "http://localhost";
-                var baseUrl = "http://health.lab.tt" 
+                var baseUrl = "http://localhost";
+                // var baseUrl = "http://health.lab.tt" 
                 // var getUrl = window.location.origin;
                 window.location = baseUrl;
             }   
@@ -342,7 +380,8 @@ $( document ).ready(function() {
                 if(typeof call_back==='function')
                     call_back(JSON.parse(response))
                 else
-                    console.log(JSON.parse(response))
+                    console.log(response);
+                    // console.log(JSON.parse(response))
             },
             headers: {
                 "Content-Type":"application/x-www-form-urlencoded",

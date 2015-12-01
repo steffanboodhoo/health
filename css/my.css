@@ -8,3 +8,29 @@
 .show{
 	display:block;
 }
+
+h4 {
+  font-family: 'Antic Slab', serif;
+}
+
+.container-full a {
+  color:#efefef;
+  text-decoration:none;
+}
+
+.pg-title{
+	padding: 1%;
+}
+.pull-right{
+	float:right;
+}
+.flex-cont{
+	display: -webkit-flex !important;
+  	display: flex !important;
+  	flex-direction: row !important;
+  	-webkit-flex-direction: row !important;
+}
+.flex-input{
+	-webkit-flex: 1;
+	flex:1;
+}

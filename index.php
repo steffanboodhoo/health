@@ -74,5 +74,9 @@ $app->get('/subject/delete/:id', function ($id) {
 	}
 });
 
+$app->get('/subject/query', function () use ($app){
+	$allPostVars = $app->request->get();
+	echo user_query($allPostVars);
+});
 $app->run();
 ?>

@@ -25,8 +25,8 @@ $( document ).ready(function() {
     	console.log(dataObj);
     	_post('/login',dataObj,function(data){
     		if(data['status']==1){
-                // var baseUrl = "http://localhost";
-                var baseUrl = "http://health.lab.tt"
+                var baseUrl = "http://localhost";
+                // var baseUrl = "http://health.lab.tt"
                 // var getUrl = window.location.origin;
                 var getUrl = baseUrl+'/index.php/home';
                 window.location = baseUrl;
