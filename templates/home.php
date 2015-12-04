@@ -219,6 +219,11 @@ if(!isset($_SESSION)){
 		<script type="text/javascript" src="../js/jquery.min.js"></script>
 		<script type="text/javascript" src="../js/bootstrap.js"></script>
 		<script type="text/javascript" src="../js/datatables.min.js"></script>
+		<script type="text/javascript" src="../js/datatables.buttons.js"></script>
+		<script type="text/javascript" src="../js/pdfmake.min.js"></script>
+		<script type="text/javascript" src="../js/vfs_fonts.js"></script>
+		<script type="text/javascript" src="../js/buttons.html5.min.js"></script>
+		<script type="text/javascript" src="../js/buttons.print.min.js"></script>
 		<script type="text/javascript" src="../js/bootstrap-datepicker.min.js"></script>
 		<script type="text/javascript" src="../js/home.js"></script>
 	</body>

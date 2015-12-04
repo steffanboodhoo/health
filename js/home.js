@@ -68,6 +68,7 @@ $( document ).ready(function() {
             // _get('/getAll',null,function(dataObj){createTable(dataObj,true)});
             _get('/subject/query',params,function(dateObj){
                 console.log(dateObj);
+                $('#query_table').empty();
                 createTable('query_table',dateObj,false)});
 
             function getNames(str){
@@ -86,9 +87,15 @@ $( document ).ready(function() {
                 var i = 1;
                 tolkens = [];
                 while(clean_tolkens[i] != "from"){
-                    tolkens.push(clean_tolkens[i++]);
+                    if(clean_tolkens[i]=="as")
+                        tolkens.pop();
+                    else
+                        tolkens.push(clean_tolkens[i]);
+                    i++;
                 }
-
+                if(tolkens[0]=="*")
+                    return ['id','age','sex','address','diagnosis','symptoms','notes','onset','seen','referral'];
+                
                 return tolkens;
             }
             
@@ -135,10 +142,23 @@ $( document ).ready(function() {
 		table.append(thead);table.append(tbody);
 		$('#'+container).append(table);
 
-		var table = $('#'+container+'_results_table').DataTable();
+		var table = $('#'+container+'_results_table').DataTable({
+            dom: 'Bfrtip',
+            buttons:[{
+                extend: 'collection',
+                text: 'Export',
+                buttons: [
+                    'copy',
+                    'excel',
+                    'csv',
+                    'pdf',
+                    'print'
+                ]
+            }
+        ]});
         //BUTTONS
         if(tableOptions){
-    		$('#results_table tbody button').on( 'click',function (event) {  
+    		$('#'+container+'_results_table tbody button').on( 'click',function (event) {  
                 if(!access){
                     toggleErrBox(true);
                     return;
